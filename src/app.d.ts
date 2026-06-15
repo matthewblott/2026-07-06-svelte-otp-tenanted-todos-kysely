@@ -1,12 +1,5 @@
 import type { Session, User } from 'better-auth';
 
-declare module '$app/environment' {
-  export const browser: boolean;
-  export const dev: boolean;
-  export const building: boolean;
-  export const version: string;
-}
-
 declare module '$app/env/private' {
   export const DATABASE_URL: string;
   export const GOOSE_DRIVER: string;
@@ -15,7 +8,9 @@ declare module '$app/env/private' {
   
   export const BETTER_AUTH_URL: string;
   export const BETTER_AUTH_SECRET: string;
-  export const building: boolean;
+
+  export const ORIGIN: string;
+
 }
 
 declare global {

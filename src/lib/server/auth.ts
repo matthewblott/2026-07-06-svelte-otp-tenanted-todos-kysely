@@ -2,12 +2,15 @@ import { betterAuth } from 'better-auth';
 import { emailOTP } from 'better-auth/plugins';
 import { sveltekitCookies } from 'better-auth/svelte-kit';
 import { getRequestEvent } from '$app/server';
-import { BETTER_AUTH_SECRET, BETTER_AUTH_URL } from '$app/env/private';
+import { BETTER_AUTH_SECRET, BETTER_AUTH_URL, ORIGIN } from '$env/static/private';
 import { db } from './db';
 
 export const auth = betterAuth({
-  baseURL: BETTER_AUTH_URL,
-  secret: BETTER_AUTH_SECRET,
+  // baseURL: BETTER_AUTH_URL,
+  // secret: BETTER_AUTH_SECRET,
+	baseURL: ORIGIN,
+	secret: BETTER_AUTH_SECRET,
+	// database: drizzleAdapter(db, { provider: 'sqlite' }),
 
   // Pass the better-sqlite3 instance; Better Auth wraps it with Kysely internally.
   database: db,
