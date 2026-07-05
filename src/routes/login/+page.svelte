@@ -26,10 +26,6 @@
   async function verifyOtp() {
     loading = true;
     error = '';
-    // const { error: err } = await authClient.emailOtp.signIn({
-    //   email,
-    //   otp,
-    // });
 
     const { error: err } = await authClient.signIn.emailOtp({
       email,
@@ -67,4 +63,3 @@
 {#if error}
   <p role="alert">{error}</p>
 {/if}
-
