@@ -11,6 +11,7 @@
   async function sendOtp() {
     loading = true;
     error = '';
+
     const { error: err } = await authClient.emailOtp.sendVerificationOtp({
       email,
       type: 'sign-in',

@@ -1,0 +1,18 @@
+{
+	"$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "@sveltejs/opencode",
+  ],
+  "mcp": {
+    "svelte": {
+      "type": "remote",
+      "url": "https://mcp.svelte.dev/mcp",
+    },
+  },
+  "references": {
+    "auth-otp": {
+      "path": "/Users/Matt/Development/2026-07-06-svelte-otp-tenanted-todos-kysely"
+      "description": "Comprehensive example project of how to use auth-otp with SvelteKit",
+    },
+  },
+}
