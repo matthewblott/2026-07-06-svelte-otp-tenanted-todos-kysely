@@ -8,6 +8,8 @@ export const actions: Actions = {
     const email = String(form.get('email'));
     const otp = String(form.get('otp'));
 
+    const { locals, request } = event;
+
     try {
       await auth.api.signInEmailOTP({
         body: {
@@ -20,7 +22,6 @@ export const actions: Actions = {
       const message = err instanceof Error ? err.message : 'Invalid or expired code.';
       return fail(400, { error: message, email: email as string, otp: otp.toString() });
     }
-
     redirect(303, '/');
   },
 };

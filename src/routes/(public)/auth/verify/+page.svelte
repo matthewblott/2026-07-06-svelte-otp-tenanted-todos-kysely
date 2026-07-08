@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { authClient } from '$lib/auth-client';
+  import { authClient as auth } from '$lib/auth-client';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
 
@@ -7,12 +7,20 @@
   let email = $state(page.url.searchParams.get('email') ?? '');
 
   async function verify() {
-    await authClient.signIn.emailOtp({
+    const { data, error } = await auth.signIn.emailOtp({
       email,
       otp,
     });
 
-    goto('/');
+    if (error) {
+      // handle error, e.g. show a message
+      return;
+    }
+
+    const username = data?.user?.name;
+    const route = `/${username}/auth/sign-out`;
+
+    goto(route);
   }
 </script>
 

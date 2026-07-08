@@ -20,18 +20,14 @@
 <p>Enter the code sent to {email}.</p>
 <form method="POST">
   <input type="hidden" name="email" value={email} />
-  <label for="otp">One‑time code</label>
   <input 
-    id="otp" 
-    type="text" 
-    inputmode="numeric" 
     name="otp" 
     bind:value={otp} 
     placeholder="123456"
     maxlength="6"
     required 
-  />
-  <button type="submit">Sign in</button>
+  >
+  <button>Sign in</button>
 </form>
 
 {#if error}

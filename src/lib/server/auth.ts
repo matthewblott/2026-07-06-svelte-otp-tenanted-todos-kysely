@@ -27,6 +27,11 @@ export const auth = betterAuth({
             },
           };
         },
+        after: async (user) => {
+          // Create tenant database
+          // await initTenantDb(user.id);
+        },
+
       },
       update: {
         before: async (user) => {
