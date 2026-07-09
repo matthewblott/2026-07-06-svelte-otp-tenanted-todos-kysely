@@ -1,8 +1,7 @@
-import Database from 'better-sqlite3';
+import { Database } from 'bun:sqlite';
 import { env } from '$env/dynamic/private';
 
-// Better Auth's Kysely adapter accepts a better-sqlite3 instance directly.
-export const db = new Database(env.DATABASE_URL);
+export const db = new Database(env.DATABASE_URL, { create: true, safeIntegers: true });
 
-db.pragma('journal_mode = WAL');
-db.pragma('foreign_keys = ON');
+db.prepare('PRAGMA foreign_keys = ON').run();
+db.prepare('PRAGMA trusted_schema = 1').run();

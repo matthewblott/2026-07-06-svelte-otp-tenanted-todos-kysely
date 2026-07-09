@@ -4,16 +4,37 @@ import { sveltekitCookies } from 'better-auth/svelte-kit';
 import { getRequestEvent } from '$app/server';
 import { env } from '$env/dynamic/private';
 import { db } from './db';
+import { copyFile, mkdir } from 'fs/promises'
 
 export const auth = betterAuth({
 	baseURL: env.BASE_URL,
 	secret: env.BETTER_AUTH_SECRET,
   database: db,
+  advanced: {
+    database: {
+      generateId: (options) => {
+        if (options.model === "user" || options.model === "users") {
+          return undefined; // let SQLite auto-increment
+        }
+        return crypto.randomUUID();
+      },
+    },
+  },
   user: {
+    // modelName: "users",
     deleteUser: { 
       enabled: true
       // Once enabled you can call: authClient.deleteUser
     }
+  },
+  session: {
+    // modelName: "sessions",
+  },
+  account: {
+    // modelName: "accounts",
+  },
+  verification: {
+    // modelName: "verifications",
   },
   databaseHooks: {
     user: {
@@ -28,8 +49,8 @@ export const auth = betterAuth({
           };
         },
         after: async (user) => {
-          // Create tenant database
-          // await initTenantDb(user.id);
+          const userId = user.id;
+          await createTenantDb(userId); 
         },
 
       },
@@ -106,19 +127,11 @@ function generateRandomName() {
   return name;
 }
 
-// async function generateUniqueRandomName(db): Promise<string> {
-//   let name: string;
-//   let exists = true;
-//
-//   while (exists) {
-//     name = generateRandomName();
-//     const existing = await db
-//       .selectFrom('user')
-//       .select('id')
-//       .where('name', '=', name)
-//       .executeTakeFirst();
-//     exists = !!existing;
-//   }
-//
-//   return name!;
-// }
+async function createTenantDb(userId: string): Promise<void> {
+  await mkdir('./storage/tenants', { recursive: true })
+  await copyFile(
+    './storage/main.sqlite3',
+    `./storage/tenants/${userId}.sqlite3`
+  )
+
+}
