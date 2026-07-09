@@ -2,6 +2,7 @@
   import { authClient as auth } from '$lib/auth-client';
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
+  import { createRoutes } from '$lib/routes';
 
   let otp = $state('');
   let email = $state(page.url.searchParams.get('email') ?? '');
@@ -18,7 +19,8 @@
     }
 
     const username = data?.user?.name;
-    const route = `/${username}/auth/sign-out`;
+    const routes = createRoutes(username);
+    const route = routes.user?.signOut.browser()!;
 
     goto(route);
   }

@@ -4,7 +4,7 @@ import { sveltekitCookies } from 'better-auth/svelte-kit';
 import { getRequestEvent } from '$app/server';
 import { env } from '$env/dynamic/private';
 import { db } from './db';
-import { copyFile, mkdir } from 'fs/promises'
+import { copyFile, mkdir, rm } from 'fs/promises'
 
 export const auth = betterAuth({
 	baseURL: env.BASE_URL,
@@ -70,6 +70,12 @@ export const auth = betterAuth({
           return { data: user };
         },
       },
+      delete: {
+        after: async (user) => {
+          const userId = user.id;
+          await deleteTenantDb(userId);
+        },
+      },
     },
   },
   plugins: [
@@ -133,5 +139,8 @@ async function createTenantDb(userId: string): Promise<void> {
     './storage/main.sqlite3',
     `./storage/tenants/${userId}.sqlite3`
   )
-
 }
+
+async function deleteTenantDb(userId: string): Promise<void> {
+  await rm(`./storage/tenants/${userId}.sqlite3`)
+} 

@@ -15,16 +15,13 @@ export function createTenantRoutes(username: string) {
         server: () => 
           `/${username}/user/rename/server`,
       },
-    },
-    auth: {
       signOut: {
         browser: () => 
-          `/${username}/auth/sign-out`,
+          `/${username}/user/sign-out`,
         server: () => 
-          `/${username}/auth/sign-out/server`,
+          `/${username}/user/sign-out/server`,
       },
     },
-
     // ...
   } as const;
 }

@@ -7,7 +7,7 @@
 	let { children, data }: { children: Snippet; data: LayoutData } = $props();
 
   const routes = createTenantRoutes(data.user.name);
-  const signOutRoute = routes.auth.signOut.browser();
+  const signOutRoute = routes.user.signOut.browser();
 
   setContext('routes', routes);
 
