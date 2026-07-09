@@ -8,6 +8,7 @@
 </script>
 
 <h1>Sign in</h1>
+
 <p>We'll send a one-time code to your email.</p>
 <form method="POST">
   <label for="email">Email</label>

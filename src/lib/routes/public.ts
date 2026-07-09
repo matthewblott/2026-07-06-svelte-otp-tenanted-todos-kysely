@@ -1,6 +1,5 @@
 export const publicRoutes = {
   auth: {
-    // signIn: () => `/auth/sign-in`,
     signIn: {
       browser: () => 
         `/auth/sign-in`,
@@ -13,7 +12,6 @@ export const publicRoutes = {
       server: () => 
         `/auth/verify/server`,
     },
-    // signOut: () => `/sign-out`,
   },
   home: () => `/`,
 } as const;

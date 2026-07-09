@@ -1,24 +1,20 @@
 <script lang="ts">
-  import { createTenantRoutes } from '$lib/routes/tenant';
   import { setContext } from 'svelte';
   import type { LayoutData } from './$types';
   import type { Snippet } from 'svelte';
+  import { createTenantRoutes } from '$lib/routes/tenant';
 
 	let { children, data }: { children: Snippet; data: LayoutData } = $props();
 
   const routes = createTenantRoutes(data.user.name);
-  const signOutRoute = routes.user.signOut.browser();
 
   setContext('routes', routes);
 
 </script>
 
 <div>
-  {data.user?.name}
-  <br>
-  {data.user?.email}
-  <br>
-  <a href={signOutRoute}>Sign out</a>  
+  <a href={routes.todos.index()}>Todos</a> | 
+  <a href={routes.account.index()}>{data.user?.name}</a>
 </div>
 
 {@render children()}

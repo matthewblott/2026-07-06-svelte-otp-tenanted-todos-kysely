@@ -20,13 +20,14 @@
 
     const username = data?.user?.name;
     const routes = createRoutes(username);
-    const route = routes.user?.signOut.browser()!;
+    const route = routes.todos.index();
 
     goto(route);
   }
 </script>
 
-{email}
+<h1>Verify Email</h1>
+
 <form
   onsubmit={(e) => {
     e.preventDefault();

@@ -16,7 +16,7 @@
   });
 </script>
 
-<h1>Check your email</h1>
+<h1>Verify Email</h1>
 <p>Enter the code sent to {email}.</p>
 <form method="POST">
   <input type="hidden" name="email" value={email} />

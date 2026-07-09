@@ -1,27 +1,37 @@
+type Id = number;
+
 export function createTenantRoutes(username: string) {
   return {
-    user: {
-      // delete: () => `/${username}/account/delete`,
-      // rename: () => `/${username}/account/rename`,
+    account: {
+      index: () =>
+        `/${username}/account`,
       delete: {
         browser: () => 
-          `/${username}/user/delete`,
+          `/${username}/account/delete`,
         server: () => 
-          `/${username}/user/delete/server`,
+          `/${username}/account/delete/server`,
       },
       rename: {
         browser: () => 
-          `/${username}/user/rename`,
+          `/${username}/account/rename`,
         server: () => 
-          `/${username}/user/rename/server`,
+          `/${username}/account/rename/server`,
       },
       signOut: {
         browser: () => 
-          `/${username}/user/sign-out`,
+          `/${username}/account/sign-out`,
         server: () => 
-          `/${username}/user/sign-out/server`,
+          `/${username}/account/sign-out/server`,
       },
     },
+    todos: {
+      index: () => 
+        `/${username}/todos`,
+      new: () => 
+        `/${username}/todos/new`,
+      edit: (id: Id) => 
+        `/${username}/todos/${id}`,
+    }
     // ...
   } as const;
 }

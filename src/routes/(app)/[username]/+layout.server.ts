@@ -1,7 +1,5 @@
 import { error, redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
-import { createTenantRoutes } from '$lib/routes/tenant';
-
 
 export const load: LayoutServerLoad = async ({ params, locals }) => {
   const session = locals.session;
@@ -14,8 +12,6 @@ export const load: LayoutServerLoad = async ({ params, locals }) => {
   if (user.name !== params.username) {
     throw error(403, 'Not your tenant');
   }
-
-  const routes = createTenantRoutes(user.name);
 
   // Todo: Get the tenant db
   // locals.db = getTenantDb(params.username); 

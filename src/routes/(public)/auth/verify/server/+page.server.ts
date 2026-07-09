@@ -1,6 +1,7 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { auth } from '$lib/server/auth';
+import { createRoutes } from '$lib/routes';
 
 export const actions: Actions = {
   default: async (event) => {
@@ -8,7 +9,7 @@ export const actions: Actions = {
     const email = String(form.get('email'));
     const otp = String(form.get('otp'));
 
-    const { locals, request } = event;
+    const { locals } = event;
 
     try {
       await auth.api.signInEmailOTP({
@@ -22,6 +23,11 @@ export const actions: Actions = {
       const message = err instanceof Error ? err.message : 'Invalid or expired code.';
       return fail(400, { error: message, email: email as string, otp: otp.toString() });
     }
-    redirect(303, '/');
+
+    const username = locals?.user?.name;
+    const routes = createRoutes(username);
+    const route = routes.account?.signOut.browser()!;
+
+    redirect(303, route);
   },
 };
