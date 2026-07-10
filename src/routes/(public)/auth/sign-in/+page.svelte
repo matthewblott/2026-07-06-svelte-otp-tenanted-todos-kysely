@@ -12,8 +12,8 @@
 <p>We'll send a one-time code to your email.</p>
 <form method="POST">
   <label for="email">Email</label>
-  <input id="email" type="email" name="email" bind:value={email} required />
-  <button type="submit">Send code</button>
+  <input name="email" bind:value={email}>
+  <button>Send code</button>
 </form>
 
 {#if error}
