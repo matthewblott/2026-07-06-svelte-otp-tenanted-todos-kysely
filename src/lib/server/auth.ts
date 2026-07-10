@@ -5,6 +5,7 @@ import { getRequestEvent } from '$app/server';
 import { env } from '$env/dynamic/private';
 import { db } from './db';
 import { copyFile, mkdir, rm } from 'fs/promises'
+import nodemailer from 'nodemailer';
 
 export const auth = betterAuth({
 	baseURL: env.BASE_URL,
@@ -54,22 +55,6 @@ export const auth = betterAuth({
         },
 
       },
-      update: {
-        before: async (user) => {
-          if (user.name) {
-            // const existing = await db
-            //   .selectFrom('user')
-            //   .select('id')
-            //   .where('name', '=', user.name)
-            //   .executeTakeFirst();
-            //
-            // if (existing && existing.id !== user.id) {
-            //   throw new Error('Name already taken');
-            // }
-          }
-          return { data: user };
-        },
-      },
       delete: {
         after: async (user) => {
           const userId = user.id;
@@ -81,8 +66,31 @@ export const auth = betterAuth({
   plugins: [
     emailOTP({ 
       async sendVerificationOTP({ email, otp, type }) { 
-        // Replace with your real email sender (Nodemailer, Resend, etc.)
         console.log(`[OTP] To: ${email}  Code: ${otp}  Type: ${type}`);
+
+        const transporter = nodemailer.createTransport({
+          host: env.SMTP_HOST, 
+          port: env.SMTP_PORT,
+          auth: {
+            user: env.SMTP_USER, 
+            pass: env.SMTP_PASSWORD
+          }
+        });
+
+        const mailOptions = {
+          from: "Private Person <hello@skribl.p34k.de>",
+          to: `A Test User <${email}>`,
+          subject: "Hello from Mailtrap",
+          text: `This is a test e-mail message. OTP Code: ${otp}`,
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+          if (error) {
+            console.log(`Error: ${error}`);
+          } else {
+            console.log(`Email sent: ${info.response}`);
+          }
+        });
 
         if (type === "sign-in") { 
           // Send the OTP for sign in

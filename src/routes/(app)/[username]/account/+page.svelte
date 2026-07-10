@@ -5,7 +5,7 @@
 
 <h1>Account</h1>
 
-<a href={routes.account.rename.browser()}>Rename User</a>
+<a href={routes.account.rename.browser()}>Rename Account</a>
 <br>
 <a href={routes.account.signOut.browser()}>Sign Out</a>
 <br>
