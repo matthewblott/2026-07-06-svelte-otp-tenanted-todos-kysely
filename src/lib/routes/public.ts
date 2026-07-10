@@ -1,17 +1,9 @@
 export const publicRoutes = {
   auth: {
-    signIn: {
-      browser: () => 
-        `/auth/sign-in`,
-      server: () => 
-        `/auth/sign-in/server`,
-    },
-    verify: {
-      browser: () => 
-        `/auth/verify`,
-      server: () => 
-        `/auth/verify/server`,
-    },
+    signIn: () => 
+      `/auth/sign-in`,
+    verify: () => 
+      `/auth/verify`,
   },
   home: () => `/`,
 } as const;

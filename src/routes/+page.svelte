@@ -4,4 +4,4 @@
 
 <h1>Home</h1>
 
-<a href={routes.auth.signIn.browser()}>Sign-in</a>
+<a href={routes.auth.signIn()}>Sign-in</a>

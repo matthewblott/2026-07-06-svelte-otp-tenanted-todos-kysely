@@ -5,24 +5,12 @@ export function createTenantRoutes(username: string) {
     account: {
       index: () =>
         `/${username}/account`,
-      delete: {
-        browser: () => 
-          `/${username}/account/delete`,
-        server: () => 
-          `/${username}/account/delete/server`,
-      },
-      rename: {
-        browser: () => 
-          `/${username}/account/rename`,
-        server: () => 
-          `/${username}/account/rename/server`,
-      },
-      signOut: {
-        browser: () => 
-          `/${username}/account/sign-out`,
-        server: () => 
-          `/${username}/account/sign-out/server`,
-      },
+      delete: () => 
+        `/${username}/account/delete`,
+      rename: () => 
+        `/${username}/account/rename`,
+      signOut: () => 
+        `/${username}/account/sign-out`,
     },
     todos: {
       index: () => 

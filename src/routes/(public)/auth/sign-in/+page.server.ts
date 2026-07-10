@@ -21,7 +21,7 @@ export const actions: Actions = {
       return fail(400, { error: message, email, step: 'email' });
     }
 
-    const route = `${routes.auth.verify.browser()}?email=${encodeURIComponent(email)}`;
+    const route = `${routes.auth.verify()}?email=${encodeURIComponent(email)}`;
 
     // Redirect to verify page with email as query parameter
     redirect(303, route);
