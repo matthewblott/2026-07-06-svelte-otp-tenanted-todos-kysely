@@ -5,15 +5,17 @@
   let email = $state(form?.email ?? '');
   let error = $state(form?.error ?? '');
 
+  import PageHeader from '$lib/components/PageHeader.svelte';
 </script>
 
-<h1>Sign in</h1>
+<PageHeader title="Sign in">
+  <div role="group">
+    <button form="send-otp">Send code</button>
+  </div>
+</PageHeader>
 
-<p>We'll send a one-time code to your email.</p>
-<form method="POST">
-  <label for="email">Email</label>
-  <input name="email" bind:value={email}>
-  <button>Send code</button>
+<form method="POST" id="send-otp">
+  <input name="email" bind:value={email} placeholder="sally@example.com">
 </form>
 
 {#if error}

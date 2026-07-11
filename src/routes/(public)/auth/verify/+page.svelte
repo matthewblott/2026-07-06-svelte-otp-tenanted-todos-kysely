@@ -24,11 +24,19 @@
 
     goto(route);
   }
+  import PageHeader from '$lib/components/PageHeader.svelte';
 </script>
 
-<h1>Verify Email</h1>
+<PageHeader title="Verify Email">
+  <div role="group">
+    <button form="verify-otp">
+      Verify 
+    </button>
+  </div>
+</PageHeader>
 
 <form
+  id="verify-otp"
   onsubmit={(e) => {
     e.preventDefault();
     verify();
@@ -37,7 +45,4 @@
   <input type="hidden" name="email" bind:value={email}>
   <input bind:value={otp} required placeholder="123456">
 
-  <button>
-    Verify 
-  </button>
 </form>

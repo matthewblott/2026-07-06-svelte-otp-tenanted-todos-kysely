@@ -7,10 +7,9 @@
 
 <form method="POST" action="?/update">
   <input name="name" value={form?.name ?? data.todo.name}>
-  <br>
   <input name="description" value={form?.description?? data.todo.description}>
   {#if form?.message}<p>{form.message}</p>{/if}
-  <button type="submit">Save</button>
+  <button>Save</button>
 </form>
 
 <form method="POST" action="?/delete">
