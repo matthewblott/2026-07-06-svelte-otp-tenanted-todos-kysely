@@ -1,9 +1,20 @@
 <script lang="ts">
-  import { getContext } from "svelte";
+  // import { getContext } from "svelte";
   import { authClient } from '$lib/auth-client';
-  const routes = getContext('routes');
+  // const routes = getContext('routes');
   const session = authClient.useSession();
   
+  import { createTenantRoutes } from '$lib/routes/tenant';
+  import type { LayoutData } from '/$types';
+
+	let { data }: { data: LayoutData } = $props();
+
+  const username = data.user.name;
+  console.log('username', username);
+
+  // const routes = $state(createTenantRoutes(username));
+  const routes = $derived(createTenantRoutes(data.user.name));
+
   let isAnonymous = $state(true); 
 
   $effect(() => {

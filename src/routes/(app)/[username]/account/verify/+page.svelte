@@ -1,6 +1,6 @@
 <script lang="ts">
   import { authClient as auth } from '$lib/auth-client';
-  import { goto } from '$app/navigation';
+  import { goto, invalidateAll } from '$app/navigation';
   import { page } from '$app/state';
   import { createRoutes } from '$lib/routes';
 
@@ -17,6 +17,8 @@
       // handle error, e.g. show a message
       return;
     }
+
+    await invalidateAll();
 
     const username = data?.user?.name;
     const routes = createRoutes(username);
