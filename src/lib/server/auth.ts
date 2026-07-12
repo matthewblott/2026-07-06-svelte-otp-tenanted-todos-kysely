@@ -1,5 +1,5 @@
 import { betterAuth } from 'better-auth';
-import { emailOTP } from 'better-auth/plugins';
+import { anonymous, emailOTP } from 'better-auth/plugins';
 import { sveltekitCookies } from 'better-auth/svelte-kit';
 import { getRequestEvent } from '$app/server';
 import { env } from '$env/dynamic/private';
@@ -104,16 +104,26 @@ export const auth = betterAuth({
       // otpLength: 6,
       // expiresIn: 300, // seconds
     }),
+    anonymous({
+      emailDomainName: "example.com",
+      disableDeleteAnonymousUser: true,
+      generateName: async (ctx) => {
+        // ctx.request      — the raw Request object (headers, etc.)
+        // ctx.headers       — request headers
+        // ctx.context        — AuthContext: db access, config, adapter, etc.
 
+        return `Guest-${crypto.randomUUID().slice(0, 8)}`;
+      },
+      onLinkAccount: async ({ anonymousUser, newUser }) => {
+       // perform actions like moving the cart items from anonymous user to the new user
+      }
+    }),
     // Must be last – handles cookie setting in SvelteKit server actions.
     sveltekitCookies(getRequestEvent),
   ],
 });
 
-function generateRandomName() {
-  // const adjectives = ['Swift', 'Quiet', 'Brave', 'Clever', 'Bright'];
-  // const nouns = ['Fox', 'Otter', 'Falcon', 'Wren', 'Lynx'];
-
+function generateRandomName(id: string) {
   const adjectives = [
     'Swift', 'Quiet', 'Brave', 'Clever', 'Bright', 'Calm', 'Bold', 'Eager',
     'Fierce', 'Gentle', 'Happy', 'Jolly', 'Keen', 'Lively', 'Mighty', 'Nimble',

@@ -11,4 +11,4 @@
 </script>
 <h1>Delete Account</h1>
 
-<button on:click={deleteUser}>Delete user</button>
+<button onclick={deleteUser}>Delete user</button>
