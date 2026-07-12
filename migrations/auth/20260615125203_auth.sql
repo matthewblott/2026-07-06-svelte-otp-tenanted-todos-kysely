@@ -6,6 +6,7 @@ create table user (
   email         text not null unique,
   emailVerified text not null default 0,  -- SQLite stores booleans as integers
   image         text,
+  isAnonymous  integer not null default 0,
   createdAt text not null default current_timestamp,
   updatedAt text not null default current_timestamp,
   check (

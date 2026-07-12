@@ -11,4 +11,4 @@
 
 <h1>Sign Out</h1>
 
-<button on:click={signOut}>Sign out</button>
+<button onclick={signOut}>Sign out</button>
