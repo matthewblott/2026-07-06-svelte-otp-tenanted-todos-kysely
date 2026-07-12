@@ -9,6 +9,10 @@ export function createTenantRoutes(username: string) {
         `/${username}/account/delete`,
       rename: () => 
         `/${username}/account/rename`,
+      register: () => 
+        `/${username}/account/register`,
+      verify: () => 
+        `/${username}/account/verify`,
       signOut: () => 
         `/${username}/account/sign-out`,
     },

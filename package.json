@@ -8,7 +8,9 @@
 		"db:auth:up": "GOOSE_MIGRATION_DIR=./migrations/auth GOOSE_DBSTRING=./storage/auth.sqlite3 goose up",
 		"db:auth:down": "GOOSE_MIGRATION_DIR=./migrations/auth GOOSE_DBSTRING=./storage/auth.sqlite3 goose down",
 		"db:main:up": "GOOSE_MIGRATION_DIR=./migrations/tenants GOOSE_DBSTRING=./storage/main.sqlite3 goose up",
-		"db:main:down": "GOOSE_MIGRATION_DIR=./migrations/tenants GOOSE_DBSTRING=./storage/main.sqlite3 goose down"
+		"db:main:down": "GOOSE_MIGRATION_DIR=./migrations/tenants GOOSE_DBSTRING=./storage/main.sqlite3 goose down",
+    "db:all:up": "mkdir -p ./storage/tenants && bun db:auth:up && bun db:main:up",
+    "db:all:down": "bun db:auth:down && bun db:main:down"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^7.0.1",
