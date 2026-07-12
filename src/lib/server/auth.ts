@@ -44,7 +44,7 @@ export const auth = betterAuth({
           return {
             data: {
               ...user,
-              name: user.name || generateRandomName(),
+              name: user.name || generateRandomName(user.id),
               // name: user.name || (await generateUniqueRandomName(db)),
             },
           };
@@ -136,8 +136,8 @@ function generateRandomName() {
 
   const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
   const noun = nouns[Math.floor(Math.random() * nouns.length)];
-  const number = Math.floor(Math.random() * 1000);
-  const name = `${adjective}${noun}${number}`.toLowerCase();
+  const number = Math.floor(Math.random() * 100);
+  const name = `${adjective}${noun}${id}${number}`.toLowerCase();
   return name;
 }
 
