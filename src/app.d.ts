@@ -6,7 +6,7 @@ declare global {
 		interface Locals {
       session: Session | null
       user: User | null
-      db: Database.Database | null
+      db: Database | null
     }
 		// interface PageData {}
 		// interface PageState {}
