@@ -1,0 +1,25 @@
+src/lib/server/auth.ts(16,7): error TS2322: Type '(options: { model: ModelNames; size?: number | undefined; }) => `${string}-${string}-${string}-${string}-${string}` | undefined' is not assignable to type 'false | GenerateIdFn | "serial" | "uuid" | undefined'.
+  Type '(options: { model: ModelNames; size?: number | undefined; }) => `${string}-${string}-${string}-${string}-${string}` | undefined' is not assignable to type 'GenerateIdFn'.
+    Type '`${string}-${string}-${string}-${string}-${string}` | undefined' is not assignable to type 'string | false'.
+      Type 'undefined' is not assignable to type 'string | false'.
+
+src/lib/server/auth.ts(92,11): error TS2769: No overload matches this call.
+  The last overload gave the following error.
+    Object literal may only specify known properties, and 'host' does not exist in type 'TransportOptions | Transport<unknown, TransportOptions>'.
+
+src/lib/server/auth.ts(138,7): error TS2322: Type '({ anonymousUser, newUser }: { anonymousUser: any; newUser: any; }, ctx: any) => Promise<void>' is not assignable to type '(data: { anonymousUser: { user: UserWithAnonymous & Record<string, any>; session: { id: string; createdAt: Date; updatedAt: Date; userId: string; expiresAt: Date; token: string; ipAddress?: string | ... 1 more ... | undefined; userAgent?: string | ... 1 more ... | undefined; } & Record<...>; }; newUser: { ...; }; ct...'.
+  Target signature provides too few arguments. Expected 2 or more, but got 1.
+
+src/lib/server/auth.ts(138,31): error TS7031: Binding element 'anonymousUser' implicitly has an 'any' type.
+
+src/lib/server/auth.ts(138,46): error TS7031: Binding element 'newUser' implicitly has an 'any' type.
+
+src/lib/server/auth.ts(138,56): error TS7006: Parameter 'ctx' implicitly has an 'any' type.
+
+src/routes/(app)/[username]/account/register/+page.server.ts(12,22): error TS2339: Property 'sendVerificationOTP' does not exist on type 'InferAPI<Prettify<{ readonly ok: StrictEndpoint<"/ok", { method: "GET"; metadata: { openapi: { description: string; responses: { "200": { description: string; content: { "application/json": { schema: { type: "object"; properties: { ok: { type: string; description: string; }; }; required: string[]; }; }; }; }; }; }; ...'.
+
+src/routes/(public)/auth/sign-in/+page.server.ts(18,35): error TS2339: Property 'sendVerificationOTP' does not exist on type 'InferAPI<Prettify<{ readonly ok: StrictEndpoint<"/ok", { method: "GET"; metadata: { openapi: { description: string; responses: { "200": { description: string; content: { "application/json": { schema: { type: "object"; properties: { ok: { type: string; description: string; }; }; required: string[]; }; }; }; }; }; }; ...'.
+
+src/routes/(public)/auth/verify/+page.server.ts(15,29): error TS2551: Property 'signInEmailOTP' does not exist on type 'InferAPI<Prettify<{ readonly ok: StrictEndpoint<"/ok", { method: "GET"; metadata: { openapi: { description: string; responses: { "200": { description: string; content: { "application/json": { schema: { type: "object"; properties: { ok: { type: string; description: string; }; }; required: string[]; }; }; }; }; }; }; ...'. Did you mean 'signInEmail'?
+
+src/routes/(public)/auth/verify/+page.server.ts(28,19): error TS18048: 'routes.todos' is possibly 'undefined'.

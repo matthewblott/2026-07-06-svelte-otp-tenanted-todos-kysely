@@ -15,7 +15,7 @@ export const auth = betterAuth({
     database: {
       generateId: (options) => {
         if (options.model === "user" || options.model === "users") {
-          return undefined; // let SQLite auto-increment
+          return false; // let SQLite auto-increment
         }
         return crypto.randomUUID();
       },
@@ -90,7 +90,7 @@ export const auth = betterAuth({
 
         const transporter = nodemailer.createTransport({
           host: env.SMTP_HOST, 
-          port: env.SMTP_PORT,
+          port: Number(env.SMTP_PORT),
           auth: {
             user: env.SMTP_USER, 
             pass: env.SMTP_PASSWORD
@@ -128,14 +128,14 @@ export const auth = betterAuth({
       emailDomainName: "example.com",
       // disableDeleteAnonymousUser: true,
       disableDeleteAnonymousUser: false,
-      generateName: async (ctx) => {
+      generateName: async () => {
         // ctx.request      — the raw Request object (headers, etc.)
         // ctx.headers       — request headers
         // ctx.context        — AuthContext: db access, config, adapter, etc.
 
         return `Guest-${crypto.randomUUID().slice(0, 8)}`;
       },
-      onLinkAccount: async ({ anonymousUser, newUser}, ctx) => {
+      onLinkAccount: async ({ anonymousUser, newUser}) => {
         // Delete database created with the new user as there is already a database for this user
         // await rm(`./storage/tenants/${newUser.user.id}.sqlite3`)
         

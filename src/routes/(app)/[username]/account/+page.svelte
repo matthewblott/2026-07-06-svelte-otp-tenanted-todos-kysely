@@ -1,19 +1,13 @@
 <script lang="ts">
-  // import { getContext } from "svelte";
   import { authClient } from '$lib/auth-client';
-  // const routes = getContext('routes');
-  const session = authClient.useSession();
-  
   import { createTenantRoutes } from '$lib/routes/tenant';
-  import type { LayoutData } from '/$types';
+  import type { PageData } from './$types';
 
-	let { data }: { data: LayoutData } = $props();
+	let { data }: { data: PageData } = $props();
 
-  const username = data.user.name;
-  console.log('username', username);
-
-  // const routes = $state(createTenantRoutes(username));
-  const routes = $derived(createTenantRoutes(data.user.name));
+  const session = authClient.useSession();
+  const username = $derived(data.user?.name);
+  const routes = $derived(createTenantRoutes(username!));
 
   let isAnonymous = $state(true); 
 

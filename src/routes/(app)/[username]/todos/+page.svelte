@@ -1,10 +1,12 @@
 <script lang="ts">
+  import { createTenantRoutes } from '$lib/routes/tenant';
   import type { PageData } from './$types';
+
   let { data }: { data: PageData } = $props();
 
-  import { getContext } from 'svelte';
-  const routes = getContext('routes');
-  
+  const username = $derived(data.user.name);
+  const routes = $derived(createTenantRoutes(username));
+
 </script>
 
 <h1>Todos</h1>

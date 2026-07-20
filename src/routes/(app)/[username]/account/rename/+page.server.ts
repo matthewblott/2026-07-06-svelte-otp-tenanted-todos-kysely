@@ -1,7 +1,14 @@
 import { auth } from '$lib/server/auth';
 import { redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
+import type { PageServerLoad } from './$types';
 import { createRoutes } from '$lib/routes';
+
+export const load : PageServerLoad = async ({ locals }) => {
+  return {
+    user: locals.user    
+  } 
+}
 
 export const actions: Actions = {
   default: async ({ request, locals }) => {
