@@ -1,20 +1,13 @@
 <script lang="ts">
-  import { authClient } from '$lib/auth-client';
   import { createTenantRoutes } from '$lib/routes/tenant';
   import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 
-  const session = authClient.useSession();
   const username = $derived(data.user?.name);
   const routes = $derived(createTenantRoutes(username!));
 
-  let isAnonymous = $state(true); 
-
-  $effect(() => {
-    const user = $session.data?.user;
-    isAnonymous = Boolean(Number(user?.isAnonymous));
-  });
+  let isAnonymous = $derived(data.user.isAnonymous); 
 
 </script>
 
