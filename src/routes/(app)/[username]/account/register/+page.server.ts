@@ -4,8 +4,8 @@ import { auth } from '$lib/server/auth';
 import { createTenantRoutes } from '$lib/routes/tenant';  
 
 export const actions: Actions = {
-  default: async (event) => {
-    const form = await event.request.formData();
+  default: async ({ request, params }) => {
+    const form = await request.formData();
     const email = String(form.get('email')).trim();
 
     try {
@@ -14,14 +14,14 @@ export const actions: Actions = {
           email: email,
           type: 'sign-in',
         },
-        headers: event.request.headers,
+        headers: request.headers,
       });
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Failed to send code.';
       return fail(400, { error: message, email, step: 'email' });
     }
 
-    const routes = createTenantRoutes(event.params.username);
+    const routes = createTenantRoutes(params.username);
     const route = `${routes.account.verify()}?email=${encodeURIComponent(email)}`;
 
     // Redirect to verify page with email as query parameter

@@ -1,12 +1,11 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { publicRoutes as routes } from '$lib/routes';
-// import { authClient as auth } from '$lib/auth-client';
 import { auth } from '$lib/server/auth';
 
 export const actions: Actions = {
-  default: async (event) => {
-    const form = await event.request.formData();
+  default: async ({ request }) => {
+    const form = await request.formData();
     const email = String(form.get('email')).trim();
 
     try {

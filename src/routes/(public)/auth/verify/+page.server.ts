@@ -5,8 +5,8 @@ import { auth } from '$lib/server/auth';
 import { APIError } from 'better-auth/api';
 
 export const actions: Actions = {
-  default: async (event) => {
-    const form = await event.request.formData();
+  default: async ({ request }) => {
+    const form = await request.formData();
     const email = String(form.get('email')).trim();
     const otp = String(form.get('otp')).trim();
 
@@ -14,7 +14,7 @@ export const actions: Actions = {
     try {
       data = await auth.api.signInEmailOTP({
         body: { email, otp },
-        headers: event.request.headers,
+        headers: request.headers,
       });
     } catch (error) {
       if (error instanceof APIError) {

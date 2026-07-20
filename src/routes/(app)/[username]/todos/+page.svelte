@@ -1,12 +1,8 @@
 <script lang="ts">
-  import { createTenantRoutes } from '$lib/routes/tenant';
   import type { PageData } from './$types';
-
+  import { createTenantRoutes } from '$lib/routes/tenant';
   let { data }: { data: PageData } = $props();
-
-  const username = $derived(data.user.name);
-  const routes = $derived(createTenantRoutes(username));
-
+  const routes = $derived(createTenantRoutes(data.user.name));
 </script>
 
 <h1>Todos</h1>
