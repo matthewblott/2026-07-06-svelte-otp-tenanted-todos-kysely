@@ -9,13 +9,8 @@ export const actions: Actions = {
     const form = await event.request.formData();
     const email = String(form.get('email')).trim();
 
-    // const { data, error } = await auth.emailOtp.sendVerificationOtp({
-    //   email: email,
-    //   type: "sign-in",
-    // });
-
     try {
-      const data = await auth.api.sendVerificationOTP({
+      await auth.api.sendVerificationOTP({
         body: {
           email: email, // required
           type: "sign-in", // required
@@ -25,12 +20,6 @@ export const actions: Actions = {
       const message = error instanceof Error ? error.message : 'Failed to send code.';
       return fail(400, { error: message, email, step: 'email' });
     }
-
-
-    // if (error) {
-    //   const message = error instanceof Error ? error.message : 'Failed to send code.';
-    //   return fail(400, { error: message, email, step: 'email' });
-    // }
 
     const route = `${routes.auth.verify()}?email=${encodeURIComponent(email)}`;
 

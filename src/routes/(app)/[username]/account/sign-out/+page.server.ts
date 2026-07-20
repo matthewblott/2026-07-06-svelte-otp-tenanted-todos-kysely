@@ -7,8 +7,6 @@ export const actions: Actions = {
     await auth.api.signOut({
       headers: request.headers
     });
-
     redirect(303, `/`);
-
   },
 };
